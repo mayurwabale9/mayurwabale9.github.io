@@ -1,262 +1,510 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mayur Wabale | Data Analyst Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mayur Wabale — Data Analyst Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
+<style>
+  :root{
+    --g-blue:#4285F4;
+    --g-red:#EA4335;
+    --g-yellow:#FBBC05;
+    --g-green:#34A853;
+    --g-blue-dark:#1a56db;
+    --surface:#ffffff;
+    --bg:#f6f8fc;
+    --bg-2:#eef2fb;
+    --ink:#202124;
+    --ink-2:#5f6368;
+    --line:#e3e6ea;
+    --radius:16px;
+    --shadow-1:0 1px 2px rgba(60,64,67,.12), 0 1px 3px rgba(60,64,67,.10);
+    --shadow-2:0 2px 6px rgba(60,64,67,.15), 0 4px 12px rgba(60,64,67,.10);
+    --shadow-3:0 8px 24px rgba(60,64,67,.18);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Roboto',sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:'Google Sans','Roboto',sans-serif; letter-spacing:-.01em;}
+  a{text-decoration:none; color:inherit;}
+  ul{list-style:none;}
+  section{padding:88px 24px;}
+  .wrap{max-width:1080px; margin:0 auto;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Google Sans',sans-serif; font-weight:500; font-size:13px;
+    letter-spacing:.08em; text-transform:uppercase; color:var(--g-blue);
+    margin-bottom:12px;
+  }
+  .eyebrow .dot{width:8px;height:8px;border-radius:50%; background:var(--g-blue);}
+  .section-title{font-size:32px; font-weight:700; margin-bottom:8px; color:var(--ink);}
+  .section-sub{color:var(--ink-2); font-size:16px; margin-bottom:48px; max-width:600px;}
 
-    <link rel="stylesheet" href="style.css">
+  /* NAV */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(255,255,255,.85); backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    max-width:1080px; margin:0 auto; padding:14px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Google Sans',sans-serif; font-weight:700; font-size:19px;}
+  .brand-mark{display:flex; gap:2px;}
+  .brand-mark span{width:8px; height:8px; border-radius:50%;}
+  .brand-mark span:nth-child(1){background:var(--g-blue);}
+  .brand-mark span:nth-child(2){background:var(--g-red);}
+  .brand-mark span:nth-child(3){background:var(--g-yellow);}
+  .brand-mark span:nth-child(4){background:var(--g-green);}
+  .nav-links{display:flex; gap:32px; font-size:14px; font-weight:500; color:var(--ink-2);}
+  .nav-links a{padding:6px 0; border-bottom:2px solid transparent; transition:.2s;}
+  .nav-links a:hover{color:var(--g-blue); border-color:var(--g-blue);}
+  .nav-cta{
+    background:var(--g-blue); color:#fff; padding:9px 20px; border-radius:100px;
+    font-size:14px; font-weight:500; box-shadow:var(--shadow-1); transition:.2s;
+  }
+  .nav-cta:hover{box-shadow:var(--shadow-2); background:var(--g-blue-dark); transform:translateY(-1px);}
+  .menu-btn{display:none;}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  /* HERO */
+  .hero{
+    padding:160px 24px 100px; position:relative; overflow:hidden;
+  }
+  .hero::before{
+    content:''; position:absolute; top:-120px; right:-160px; width:520px; height:520px;
+    background:radial-gradient(circle, rgba(66,133,244,.14) 0%, rgba(66,133,244,0) 70%);
+    border-radius:50%;
+  }
+  .hero::after{
+    content:''; position:absolute; bottom:-160px; left:-160px; width:420px; height:420px;
+    background:radial-gradient(circle, rgba(52,168,83,.10) 0%, rgba(52,168,83,0) 70%);
+    border-radius:50%;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.1fr .9fr; gap:64px; align-items:center;
+    position:relative; z-index:1;
+  }
+  .hero h1{font-size:52px; line-height:1.12; font-weight:700; margin-bottom:20px;}
+  .hero h1 .accent{
+    background:linear-gradient(90deg, var(--g-blue), var(--g-green));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p.lead{font-size:18px; color:var(--ink-2); max-width:480px; margin-bottom:32px;}
+  .chip-row{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:36px;}
+  .chip{
+    display:inline-flex; align-items:center; gap:6px;
+    background:var(--surface); border:1px solid var(--line); padding:8px 14px;
+    border-radius:100px; font-size:13px; font-weight:500; color:var(--ink-2);
+    box-shadow:var(--shadow-1);
+  }
+  .chip .material-icons-round{font-size:16px; color:var(--g-blue);}
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--g-blue); color:#fff; padding:13px 26px; border-radius:100px;
+    font-weight:500; font-size:15px; box-shadow:var(--shadow-2); display:inline-flex;
+    align-items:center; gap:8px; transition:.2s; border:none; cursor:pointer;
+  }
+  .btn-primary:hover{background:var(--g-blue-dark); transform:translateY(-2px); box-shadow:var(--shadow-3);}
+  .btn-outline{
+    background:#fff; color:var(--ink); padding:13px 26px; border-radius:100px;
+    font-weight:500; font-size:15px; border:1px solid var(--line); display:inline-flex;
+    align-items:center; gap:8px; transition:.2s;
+  }
+  .btn-outline:hover{border-color:var(--g-blue); color:var(--g-blue); transform:translateY(-2px);}
 
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  .hero-photo-wrap{position:relative; display:flex; justify-content:center;}
+  .photo-card{
+    position:relative; width:320px; height:380px; border-radius:28px;
+    overflow:hidden; box-shadow:var(--shadow-3); background:var(--surface);
+  }
+  .photo-card img{width:100%; height:100%; object-fit:cover; display:block;}
+  .orbit-badge{
+    position:absolute; background:#fff; border-radius:16px; padding:12px 16px;
+    box-shadow:var(--shadow-2); display:flex; align-items:center; gap:10px;
+    font-size:13px; font-weight:500;
+  }
+  .orbit-badge.b1{top:-18px; left:-36px;}
+  .orbit-badge.b2{bottom:-16px; right:-40px;}
+  .orbit-badge .material-icons-round{font-size:20px;}
+  .orbit-badge.b1 .material-icons-round{color:var(--g-green);}
+  .orbit-badge.b2 .material-icons-round{color:var(--g-red);}
+
+  /* STATS STRIP */
+  .stats{
+    background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .stats-grid{
+    max-width:1080px; margin:0 auto; padding:40px 24px;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:24px; text-align:center;
+  }
+  .stat-num{font-family:'Google Sans',sans-serif; font-size:30px; font-weight:700;}
+  .stat-num.blue{color:var(--g-blue);} .stat-num.red{color:var(--g-red);}
+  .stat-num.yellow{color:#b58500;} .stat-num.green{color:var(--g-green);}
+  .stat-label{font-size:13px; color:var(--ink-2); margin-top:4px;}
+
+  /* CARD GRID GENERIC */
+  .card{
+    background:var(--surface); border-radius:var(--radius); padding:28px;
+    box-shadow:var(--shadow-1); border:1px solid var(--line); transition:.25s;
+  }
+  .card:hover{box-shadow:var(--shadow-2); transform:translateY(-3px);}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  .about-grid .card p{color:var(--ink-2); font-size:15px;}
+  .timeline-item{display:flex; gap:16px; padding:16px 0; border-bottom:1px solid var(--line);}
+  .timeline-item:last-child{border-bottom:none;}
+  .tl-icon{
+    width:40px; height:40px; border-radius:12px; flex:0 0 40px;
+    display:flex; align-items:center; justify-content:center; color:#fff;
+  }
+  .tl-icon.blue{background:var(--g-blue);} .tl-icon.red{background:var(--g-red);}
+  .tl-icon.green{background:var(--g-green);}
+  .tl-title{font-weight:500; font-size:15px;}
+  .tl-sub{font-size:13px; color:var(--ink-2);}
+  .tl-meta{margin-left:auto; font-size:12px; color:var(--ink-2); white-space:nowrap; font-weight:500;}
+
+  /* SKILLS */
+  .skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .skill-card h4{display:flex; align-items:center; gap:10px; font-size:16px; margin-bottom:14px;}
+  .skill-card .material-icons-round{
+    width:36px; height:36px; border-radius:10px; display:flex; align-items:center;
+    justify-content:center; color:#fff; font-size:19px;
+  }
+  .tag-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{
+    background:var(--bg-2); color:var(--ink); font-size:12.5px; padding:6px 12px;
+    border-radius:8px; font-weight:500;
+  }
+
+  /* PROJECTS */
+  .projects-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .proj-card{display:flex; flex-direction:column; gap:14px;}
+  .proj-top{display:flex; align-items:center; justify-content:space-between;}
+  .proj-icon{
+    width:44px; height:44px; border-radius:12px; display:flex; align-items:center;
+    justify-content:center; color:#fff;
+  }
+  .proj-tools{font-size:11.5px; font-weight:500; color:var(--ink-2); background:var(--bg-2); padding:5px 10px; border-radius:100px;}
+  .proj-card h3{font-size:18px;}
+  .proj-row{display:flex; gap:10px; font-size:13.5px;}
+  .proj-row .label{font-weight:500; color:var(--ink); flex:0 0 60px;}
+  .proj-row .val{color:var(--ink-2);}
+  .proj-result{
+    margin-top:auto; display:flex; align-items:center; gap:8px; font-size:14px; font-weight:500;
+    padding-top:14px; border-top:1px solid var(--line);
+  }
+  .proj-result .material-icons-round{font-size:18px; color:var(--g-green);}
+
+  /* EDUCATION */
+  .edu-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .edu-card .pct{font-family:'Google Sans',sans-serif; font-weight:700; font-size:26px; color:var(--g-blue);}
+  .edu-card h4{font-size:15px; margin:6px 0 2px;}
+  .edu-card .school{font-size:13px; color:var(--ink-2);}
+  .edu-card .yr{font-size:12px; color:var(--ink-2); margin-top:10px; display:flex; align-items:center; gap:6px;}
+
+  /* COURSES */
+  .course-row{display:flex; gap:20px;}
+  .course-row .card{flex:1; display:flex; align-items:flex-start; gap:16px;}
+
+  /* CONTACT */
+  .contact-section{
+    background:linear-gradient(135deg, #1a56db 0%, #1868b8 45%, #16805e 100%);
+    border-radius:28px; padding:56px 40px; color:#fff; position:relative; overflow:hidden;
+  }
+  .contact-section::before{
+    content:''; position:absolute; width:340px; height:340px; border-radius:50%;
+    background:rgba(255,255,255,.06); top:-120px; right:-80px;
+  }
+  .contact-inner{position:relative; z-index:1; text-align:center;}
+  .contact-inner h2{font-size:30px; margin-bottom:10px;}
+  .contact-inner p{color:rgba(255,255,255,.85); max-width:460px; margin:0 auto 30px;}
+  .contact-links{display:flex; justify-content:center; gap:14px; flex-wrap:wrap;}
+  .contact-chip{
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); color:#fff;
+    padding:12px 20px; border-radius:100px; display:flex; align-items:center; gap:8px;
+    font-size:14px; font-weight:500; transition:.2s; backdrop-filter:blur(4px);
+  }
+  .contact-chip:hover{background:rgba(255,255,255,.22); transform:translateY(-2px);}
+
+  footer{padding:28px 24px; text-align:center; font-size:13px; color:var(--ink-2);}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr; text-align:center;}
+    .hero p.lead{margin-left:auto; margin-right:auto;}
+    .chip-row, .hero-actions{justify-content:center;}
+    .hero-photo-wrap{order:-1;}
+    .about-grid, .skills-grid, .projects-grid, .edu-grid{grid-template-columns:1fr;}
+    .stats-grid{grid-template-columns:repeat(2,1fr);}
+    .nav-links{display:none;}
+    .course-row{flex-direction:column;}
+    .hero h1{font-size:38px;}
+  }
+</style>
 </head>
-
 <body>
 
-<!-- ================= HEADER ================= -->
-
-<header class="header">
-    <a href="#" class="logo">Mayur.</a>
-
-    <nav class="navbar">
-        <a href="#home" class="active">Home</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#education">Education</a>
-        <a href="#contact">Contact</a>
-    </nav>
+<header>
+  <nav>
+    <div class="brand">
+      <div class="brand-mark"><span></span><span></span><span></span><span></span></div>
+      Mayur Wabale
+    </div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="#contact">Get in touch</a>
+  </nav>
 </header>
 
-<!-- ================= HOME ================= -->
-
-<section class="home" id="home">
-
-    <div class="home-content">
-
-        <h1>Hi, I'm <span>Mayur Wabale</span></h1>
-
-        <h3>Data Analyst | Power BI Developer</h3>
-
-        <p>
-            Aspiring Data Analyst with strong knowledge of SQL, Python, Excel,
-            Power BI, Tableau, and Data Visualization. Passionate about
-            transforming raw data into meaningful insights that support
-            business decisions.
-        </p>
-
-        <div class="btn-box">
-            <a href="#projects">View Projects</a>
-            <a href="#contact">Contact Me</a>
-        </div>
-
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="dot"></span>Available for internships</div>
+      <h1>Turning raw data into <span class="accent">decisions that matter.</span></h1>
+      <p class="lead">Aspiring Data Analyst with hands-on experience in analytics, business intelligence, and reporting — skilled at cleaning messy datasets and building dashboards people actually use.</p>
+      <div class="chip-row">
+        <span class="chip"><span class="material-icons-round">table_chart</span>Power BI &amp; Tableau</span>
+        <span class="chip"><span class="material-icons-round">terminal</span>SQL &amp; Python</span>
+        <span class="chip"><span class="material-icons-round">location_on</span>Mumbai, Maharashtra</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary"><span class="material-icons-round">bar_chart</span>View Projects</a>
+        <a href="mailto:mayurwabale52@email.com" class="btn-outline"><span class="material-icons-round">mail</span>Say Hello</a>
+      </div>
     </div>
-
-    <div class="home-img">
-        <img src="images/profile.png" alt="Mayur Wabale">
+    <div class="hero-photo-wrap">
+      <div class="photo-card">
+        <img src="profile.jpg" alt="Mayur Wabale">
+      </div>
+      <div class="orbit-badge b1"><span class="material-icons-round">query_stats</span>Data-driven</div>
+      <div class="orbit-badge b2"><span class="material-icons-round">verified</span>Detail focused</div>
     </div>
-
+  </div>
 </section>
 
-<!-- ================= ABOUT ================= -->
+<div class="stats">
+  <div class="stats-grid">
+    <div><div class="stat-num blue">70%</div><div class="stat-label">Fraud detection accuracy gain</div></div>
+    <div><div class="stat-num red">65%</div><div class="stat-label">Stockouts reduced</div></div>
+    <div><div class="stat-num yellow">60%</div><div class="stat-label">Reporting efficiency improved</div></div>
+    <div><div class="stat-num green">3</div><div class="stat-label">Data analytics projects shipped</div></div>
+  </div>
+</div>
 
-<section class="about" id="about">
-
-    <h2 class="heading">About <span>Me</span></h2>
-
-    <div class="about-content">
-
-        <p>
-            I'm pursuing a Bachelor's degree in Commerce while simultaneously
-            building expertise in Data Science and Analytics.
-            I enjoy working with data, creating dashboards, solving business
-            problems, and presenting insights through visualization.
-        </p>
-
-        <p>
-            My technical expertise includes SQL, Python, Power BI,
-            Tableau, Microsoft Excel, ETL, Data Cleaning,
-            Exploratory Data Analysis (EDA), and Dashboard Development.
-        </p>
-
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>About</div>
+    <h2 class="section-title">Profile Summary</h2>
+    <p class="section-sub">A quick look at who I am and where I'm headed.</p>
+    <div class="about-grid">
+      <div class="card">
+        <p>Aspiring Data Analyst with hands-on experience in data analysis, business intelligence, and reporting. Proficient in SQL, Python, Microsoft Excel, Power BI, Tableau and data visualization techniques.</p>
+        <br>
+        <p>Experienced in collecting, cleaning, analysing, and interpreting large datasets to generate actionable insights and enhance business performance — with strong analytical, problem-solving, and communication skills and a genuine passion for using data to support informed decision-making.</p>
+      </div>
+      <div class="card">
+        <div class="timeline-item">
+          <div class="tl-icon blue"><span class="material-icons-round">school</span></div>
+          <div>
+            <div class="tl-title">Bachelor of Commerce (B.Com)</div>
+            <div class="tl-sub">Mumbai University</div>
+          </div>
+          <div class="tl-meta">Pursuing</div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-icon green"><span class="material-icons-round">insights</span></div>
+          <div>
+            <div class="tl-title">Masters in Data Science &amp; Analytics</div>
+            <div class="tl-sub">IT Vedant Pvt. Ltd.</div>
+          </div>
+          <div class="tl-meta">Ongoing</div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-icon red"><span class="material-icons-round">code</span></div>
+          <div>
+            <div class="tl-title">Web Development Essentials</div>
+            <div class="tl-sub">IT Vedant Pvt. Ltd.</div>
+          </div>
+          <div class="tl-meta">Completed</div>
+        </div>
+      </div>
     </div>
-
+  </div>
 </section>
 
-<!-- ================= SKILLS ================= -->
-
-<section class="skills" id="skills">
-
-    <h2 class="heading">Technical <span>Skills</span></h2>
-
-    <div class="skills-container">
-
-        <div class="skill-box">
-            <i class='bx bx-data'></i>
-            <h3>Data Analysis</h3>
-            <p>
-                Data Cleaning<br>
-                EDA<br>
-                Statistics<br>
-                Data Wrangling
-            </p>
+<section id="skills" style="background:var(--bg-2);">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Skills</div>
+    <h2 class="section-title">Technical Skills</h2>
+    <p class="section-sub">Tools and concepts I use to turn data into decisions.</p>
+    <div class="skills-grid">
+      <div class="card skill-card">
+        <h4><span class="material-icons-round" style="background:var(--g-blue);">cleaning_services</span>Data Analysis</h4>
+        <div class="tag-row">
+          <span class="tag">Data Cleaning</span><span class="tag">EDA</span>
+          <span class="tag">Statistical Analysis</span><span class="tag">Data Wrangling</span>
         </div>
-
-        <div class="skill-box">
-            <i class='bx bx-bar-chart-alt'></i>
-            <h3>Visualization</h3>
-            <p>
-                Power BI<br>
-                Tableau<br>
-                Excel<br>
-                Looker Studio
-            </p>
+      </div>
+      <div class="card skill-card">
+        <h4><span class="material-icons-round" style="background:var(--g-red);">insert_chart</span>Visualization &amp; Reporting</h4>
+        <div class="tag-row">
+          <span class="tag">Advanced Excel</span><span class="tag">Power BI</span><span class="tag">Tableau</span>
+          <span class="tag">Looker Studio</span><span class="tag">Canva</span>
         </div>
-
-        <div class="skill-box">
-            <i class='bx bx-code-alt'></i>
-            <h3>Programming</h3>
-            <p>
-                Python<br>
-                SQL<br>
-                MySQL<br>
-                ETL
-            </p>
+      </div>
+      <div class="card skill-card">
+        <h4><span class="material-icons-round" style="background:var(--g-green);">storage</span>Programming &amp; Databases</h4>
+        <div class="tag-row">
+          <span class="tag">SQL</span><span class="tag">Python</span><span class="tag">MySQL</span><span class="tag">ETL Design</span>
         </div>
-
-        <div class="skill-box">
-            <i class='bx bx-laptop'></i>
-            <h3>Tools</h3>
-            <p>
-                Git & GitHub<br>
-                VS Code<br>
-                Google Colab<br>
-                Canva
-            </p>
+      </div>
+      <div class="card skill-card">
+        <h4><span class="material-icons-round" style="background:#b58500;">build</span>Tools</h4>
+        <div class="tag-row">
+          <span class="tag">Google Colab</span><span class="tag">VS Code</span><span class="tag">Git &amp; GitHub</span>
         </div>
-
+      </div>
+      <div class="card skill-card">
+        <h4><span class="material-icons-round" style="background:var(--g-blue);">functions</span>Core Concepts</h4>
+        <div class="tag-row">
+          <span class="tag">Probability</span><span class="tag">Statistics</span><span class="tag">Linear Algebra (Pursuing)</span>
+        </div>
+      </div>
+      <div class="card skill-card">
+        <h4><span class="material-icons-round" style="background:var(--g-green);">trending_up</span>Currently Learning</h4>
+        <div class="tag-row">
+          <span class="tag">Equity Markets</span><span class="tag">Financial Instruments</span><span class="tag">Market Terminology</span>
+        </div>
+      </div>
     </div>
-
+  </div>
 </section>
 
-<!-- ================= PROJECTS ================= -->
+<section id="projects">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Projects</div>
+    <h2 class="section-title">Featured Work</h2>
+    <p class="section-sub">Real problems, real datasets, measurable outcomes.</p>
+    <div class="projects-grid">
 
-<section class="projects" id="projects">
-
-    <h2 class="heading">Featured <span>Projects</span></h2>
-
-    <div class="project-container">
-
-        <div class="project-box">
-            <h3>Unity Rise Fundraising Dashboard</h3>
-
-            <p>
-                Built interactive dashboards in Google Looker Studio using
-                Excel datasets to monitor fundraising performance and donation
-                trends.
-            </p>
-
-            <span>Excel • Looker Studio</span>
+      <div class="card proj-card">
+        <div class="proj-top">
+          <div class="proj-icon" style="background:var(--g-blue);"><span class="material-icons-round">volunteer_activism</span></div>
+          <span class="proj-tools">Excel · Looker Studio</span>
         </div>
+        <h3>Unity Rise Fundraising Solution</h3>
+        <div class="proj-row"><span class="label">Problem</span><span class="val">Analyze donation patterns and monitor campaign performance.</span></div>
+        <div class="proj-row"><span class="label">Action</span><span class="val">Organized data in Excel, built calculated metrics and dynamic dashboards.</span></div>
+        <div class="proj-result"><span class="material-icons-round">trending_up</span>60% improvement in reporting efficiency</div>
+      </div>
 
-        <div class="project-box">
-
-            <h3>Supply Chain Management Dashboard</h3>
-
-            <p>
-                Developed an inventory and supplier analytics dashboard using
-                SQL, Excel, and Power BI with KPI tracking and forecasting.
-            </p>
-
-            <span>SQL • Power BI • Excel</span>
-
+      <div class="card proj-card">
+        <div class="proj-top">
+          <div class="proj-icon" style="background:var(--g-red);"><span class="material-icons-round">local_shipping</span></div>
+          <span class="proj-tools">SQL · Power BI · Excel</span>
         </div>
+        <h3>Supply Chain Management</h3>
+        <div class="proj-row"><span class="label">Problem</span><span class="val">Monitor inventory levels, supplier performance and logistics efficiency.</span></div>
+        <div class="proj-row"><span class="label">Action</span><span class="val">Integrated ERP/SQL/Excel data; built drill-through Power BI &amp; Tableau dashboards.</span></div>
+        <div class="proj-result"><span class="material-icons-round">trending_up</span>65% fewer stockouts, 15% lower holding costs</div>
+      </div>
 
-        <div class="project-box">
-
-            <h3>NexusPay Analytics</h3>
-
-            <p>
-                Designed a real-time payment analytics dashboard with fraud
-                detection using SQL and Power BI.
-            </p>
-
-            <span>SQL • Power BI</span>
-
+      <div class="card proj-card">
+        <div class="proj-top">
+          <div class="proj-icon" style="background:var(--g-green);"><span class="material-icons-round">payments</span></div>
+          <span class="proj-tools">SQL · Power BI</span>
         </div>
+        <h3>NexusPay</h3>
+        <div class="proj-row"><span class="label">Problem</span><span class="val">Improve transaction management and detect fraud with less manual reporting.</span></div>
+        <div class="proj-row"><span class="label">Action</span><span class="val">Built ETL pipeline, ran EDA, designed SQL schema, created Power BI dashboards.</span></div>
+        <div class="proj-result"><span class="material-icons-round">trending_up</span>70% better fraud detection, 55% less manual effort</div>
+      </div>
 
     </div>
-
+  </div>
 </section>
 
-<!-- ================= EDUCATION ================= -->
-
-<section class="education" id="education">
-
-    <h2 class="heading">Education</h2>
-
-    <div class="education-box">
-
-        <div class="edu">
-            <h3>Bachelor of Commerce (Pursuing)</h3>
-            <p>Mumbai University</p>
-        </div>
-
-        <div class="edu">
-            <h3>Masters in Data Science & Analytics</h3>
-            <p>IT Vedant</p>
-        </div>
-
-        <div class="edu">
-            <h3>Web Development Essentials</h3>
-            <p>IT Vedant</p>
-        </div>
-
+<section id="education" style="background:var(--bg-2);">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Education</div>
+    <h2 class="section-title">Academic Background</h2>
+    <p class="section-sub">Formal education alongside applied, project-based learning.</p>
+    <div class="edu-grid">
+      <div class="card edu-card">
+        <div class="pct">Pursuing</div>
+        <h4>Bachelor of Commerce (B.Com)</h4>
+        <div class="school">Mumbai University</div>
+        <div class="yr"><span class="material-icons-round" style="font-size:15px;">calendar_today</span>May 2026 – May 2027</div>
+      </div>
+      <div class="card edu-card">
+        <div class="pct">66.33%</div>
+        <h4>Higher Secondary Certificate (HSC)</h4>
+        <div class="school">Maharashtra State Board, Mumbai</div>
+        <div class="yr"><span class="material-icons-round" style="font-size:15px;">calendar_today</span>May 2023 – May 2024</div>
+      </div>
+      <div class="card edu-card">
+        <div class="pct">80.40%</div>
+        <h4>Secondary School Certificate (SSC)</h4>
+        <div class="school">Maharashtra State Board, Mumbai</div>
+        <div class="yr"><span class="material-icons-round" style="font-size:15px;">calendar_today</span>May 2021 – May 2022</div>
+      </div>
     </div>
 
+    <div style="height:32px;"></div>
+    <div class="course-row">
+      <div class="card">
+        <div class="proj-icon" style="background:var(--g-blue);"><span class="material-icons-round">workspace_premium</span></div>
+        <div>
+          <h4 style="font-size:15px; margin-bottom:2px;">Masters in Data Science and Analytics</h4>
+          <div class="school">IT Vedant Pvt. Ltd.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="proj-icon" style="background:var(--g-green);"><span class="material-icons-round">workspace_premium</span></div>
+        <div>
+          <h4 style="font-size:15px; margin-bottom:2px;">Web Development Essentials</h4>
+          <div class="school">IT Vedant Pvt. Ltd.</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ================= CONTACT ================= -->
-
-<section class="contact" id="contact">
-
-    <h2 class="heading">Contact <span>Me</span></h2>
-
-    <div class="contact-info">
-
-        <p><i class='bx bx-envelope'></i> mayurwabale52@email.com</p>
-
-        <p><i class='bx bx-phone'></i> +91 7083685021</p>
-
-        <p><i class='bx bx-map'></i> Mumbai, Maharashtra</p>
-
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-section">
+      <div class="contact-inner">
+        <h2>Let's work together</h2>
+        <p>Open to data analytics internships and entry-level opportunities. Reach out — I usually reply fast.</p>
+        <div class="contact-links">
+          <a class="contact-chip" href="mailto:mayurwabale52@email.com"><span class="material-icons-round">mail</span>mayurwabale52@email.com</a>
+          <a class="contact-chip" href="tel:+917083685021"><span class="material-icons-round">call</span>+91-7083685021</a>
+          <a class="contact-chip" href="https://linkedin.com/in/mayur-wabale-5862a63b7" target="_blank" rel="noopener"><span class="material-icons-round">work</span>LinkedIn</a>
+          <a class="contact-chip" href="https://github.com/mayurwabale9" target="_blank" rel="noopener"><span class="material-icons-round">code</span>GitHub</a>
+        </div>
+      </div>
     </div>
-
-    <div class="social-media">
-
-        <a href="https://github.com/mayurwabale9" target="_blank">
-            <i class='bx bxl-github'></i>
-        </a>
-
-        <a href="https://linkedin.com/in/mayur-wabale-5862a63b7" target="_blank">
-            <i class='bx bxl-linkedin'></i>
-        </a>
-
-    </div>
-
+  </div>
 </section>
 
-<!-- ================= FOOTER ================= -->
-
-<footer class="footer">
-
-    <p>© 2026 Mayur Wabale | Data Analyst Portfolio</p>
-
+<footer>
+  © 2026 Mayur Wabale · Mumbai, Maharashtra · Built with a Google Material theme
 </footer>
-
-<script src="script.js"></script>
 
 </body>
 </html>
